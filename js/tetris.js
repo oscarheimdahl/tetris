@@ -39,9 +39,10 @@ function setGhost() {
 	});
 	let distanceToBottom = getDistanceToOldBlocks(maxYPixel);
 	// console.log(distanceToBottom);
-	ghost.forEach(pixel => {
-		pixel.y += distanceToBottom;
-	});
+	if (distanceToBottom > 0)
+		ghost.forEach(pixel => {
+			pixel.y += distanceToBottom;
+		});
 }
 
 function getDistanceToOldBlocks(maxYPixel) {
