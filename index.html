@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="manifest" href="/site.webmanifest" />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -18,26 +22,70 @@
 		<script src="js/pixel.js"></script>
 		<script src="js/grid.js"></script>
 		<script src="js/tetris.js"></script>
-		<title>Document</title>
+		<title>Tetris</title>
 	</head>
-	<body style="padding-left: 30px">
-		<div
-			style="font-size:30px;font-family: Arial, Helvetica, sans-serif;"
-			id="score"
-		></div>
+	<body>
+		<div id="row">
+			<div id="canvas"></div>
+			<div id="menu">
+				<div id="score">0</div>
+				<button id="newGame">Play Again</button>
+			</div>
+		</div>
 	</body>
 	<style>
 		* {
 			margin: 0;
 			padding: 0;
-			background: #222222;
+			font-family: Arial, Helvetica, sans-serif;
 		}
-		canvas {
-			margin: 20px auto;
-			display: block;
-			border: 1px solid black;
+
+		#row {
+			display: flex;
+			vertical-align: top;
+			justify-content: center;
+		}
+
+		#canvas {
+			display: inline-block;
+			margin-left: 120px;
+		}
+
+		#menu {
+			width: 100px;
+			margin: 40px 0 0 20px;
+		}
+
+		#score {
+			color: white;
+			font-size: 2em;
+			width: 100px;
+			text-align: center;
+		}
+
+		#newGame {
+			display: none;
+			width: 100px;
+			height: 40px;
+			margin-top: 10px;
+			border: solid 1px white;
 			border-radius: 5px;
-			padding: 10px;
+			background: transparent;
+			color: white;
+		}
+
+		#newGame:hover {
+			border: solid 2px white;
+		}
+
+		canvas {
+			margin: 5% auto;
+			display: block;
+			border-radius: 5px;
+		}
+
+		body {
+			background: #111;
 		}
 	</style>
 </html>

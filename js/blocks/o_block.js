@@ -1,7 +1,7 @@
 class O_Block extends Block {
 	constructor() {
 		super();
-		this.color = 'tan';
+		this.color = o_color;
 		this.orientation = randomInt(4);
 		this.setPixels();
 	}

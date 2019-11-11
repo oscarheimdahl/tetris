@@ -13,7 +13,13 @@ class Grid {
 			if (pixel.color === 'white') noStroke();
 			else stroke(255);
 			fill(pixel.color);
-			rect(pixel.x * pixelSize, pixel.y * pixelSize, pixelSize, pixelSize);
+			rect(
+				pixel.x * pixelSize + border,
+				pixel.y * pixelSize + border,
+				pixelSize,
+				pixelSize,
+				5
+			);
 		});
 	}
 

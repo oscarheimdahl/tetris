@@ -1,7 +1,7 @@
 class I_Block extends Block {
 	constructor() {
 		super();
-		this.color = 'lightblue';
+		this.color = i_color;
 		this.orientation = randomInt(4);
 		this.setPixels();
 	}

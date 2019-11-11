@@ -1,7 +1,7 @@
 class T_Block extends Block {
 	constructor() {
 		super();
-		this.color = 'lightcoral';
+		this.color = t_color;
 		this.orientation = randomInt(4);
 		this.setPixels();
 	}

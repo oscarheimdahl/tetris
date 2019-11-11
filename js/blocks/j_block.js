@@ -1,7 +1,7 @@
 class J_Block extends Block {
 	constructor() {
 		super();
-		this.color = 'lightgreen';
+		this.color = j_color;
 		this.orientation = randomInt(4);
 		this.setPixels();
 	}

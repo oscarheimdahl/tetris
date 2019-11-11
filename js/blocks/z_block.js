@@ -1,7 +1,7 @@
 class Z_Block extends Block {
 	constructor() {
 		super();
-		this.color = 'purple';
+		this.color = z_color;
 		this.orientation = randomInt(4);
 		this.setPixels();
 	}

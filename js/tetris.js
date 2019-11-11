@@ -1,23 +1,42 @@
 const gridWidth = 12;
 const gridHeight = 20;
-const pixelSize = 35;
-const difficulty = 25;
+const border = 2;
+const difficulty = 30;
+//35
+let pixelSize;
 
+const i_color = 'rgb(255,45,60)';
+const j_color = 'rgb(255,149,0)';
+const l_color = 'rgb(255,204,0)';
+const o_color = 'rgb(76,217,100)';
+const s_color = 'rgb(90,200,250)';
+const z_color = 'rgb(0,122,250)';
+const t_color = 'rgb(255,20,120)';
+
+let gameOver = false;
 let grid = new Grid(gridWidth, gridHeight);
 let activeBlock;
 let oldPixels = [];
 let ghost = [];
+let canvas;
+let score;
 
 function setup() {
-	noStroke();
+	document.getElementById('newGame').onclick = () => newGame();
+	score = document.getElementById('score');
+	setPixelSize();
 	setBlock();
-	createCanvas(gridWidth * pixelSize, gridHeight * pixelSize);
-	background(0);
-	// frameRate(10);
-	activeBlock.rotate();
+	if (!canvas) {
+		canvas = createCanvas(
+			gridWidth * pixelSize + border * 2 + 1,
+			gridHeight * pixelSize + border * 2 + 1
+		);
+		canvas.parent('canvas');
+	}
 }
 
 function draw() {
+	background(255);
 	grid.reset();
 	if (frameCount % difficulty == 0) {
 		activeBlock.descend();
@@ -34,7 +53,7 @@ function setGhost() {
 	ghost = [];
 	let maxYPixel = new Pixel(0, 0);
 	activeBlock.pixels.forEach(pixel => {
-		ghost.push(new Pixel(pixel.x, pixel.y, 'grey'));
+		ghost.push(new Pixel(pixel.x, pixel.y, 'lightgrey'));
 		if (pixel.y > maxYPixel.y) maxYPixel = pixel;
 	});
 	let distanceToBottom = getDistanceToOldBlocks(maxYPixel);
@@ -43,6 +62,16 @@ function setGhost() {
 		ghost.forEach(pixel => {
 			pixel.y += distanceToBottom;
 		});
+}
+
+function newGame() {
+	gameOver = false;
+	ghost = [];
+	oldPixels = [];
+	setup();
+	loop();
+	document.getElementById('newGame').style = 'display: none;';
+	score.innerHTML = 0;
 }
 
 function getDistanceToOldBlocks(maxYPixel) {
@@ -62,7 +91,7 @@ function checkFullRow() {
 		if (!rows[pixel.y]) rows[pixel.y] = 0;
 		rows[pixel.y]++;
 	});
-	if (rows.length > 0) deleteFullRows(rows);
+	deleteFullRows(rows);
 }
 
 function deleteFullRows(rows) {
@@ -75,6 +104,8 @@ function deleteFullRows(rows) {
 			});
 		}
 	});
+	score.innerHTML =
+		parseInt(score.innerHTML) + rowsDeleted.length * 100 * rowsDeleted.length;
 	setTimeout(() => lowerRowsAboveDelete(rowsDeleted), 300);
 }
 
@@ -95,6 +126,8 @@ function newActiveBlock() {
 }
 
 function setBlock() {
+	if (gameOver) return;
+
 	switch (randomInt(7)) {
 		case 0: {
 			activeBlock = new Z_Block();
@@ -130,7 +163,14 @@ function setBlock() {
 function activeBlockToOldPixels() {
 	activeBlock.pixels.forEach(pixel => {
 		oldPixels.push(pixel);
+		if (pixel.y == 0) setGameOver();
 	});
+}
+
+function setGameOver() {
+	document.getElementById('newGame').style = 'display: block;';
+	gameOver = true;
+	noLoop();
 }
 
 function pixelsToGrid(pixels) {
@@ -140,16 +180,30 @@ function pixelsToGrid(pixels) {
 }
 
 function keyPressed(keycode) {
-	if (keycode.code === 'ArrowRight') activeBlock.moveRight();
-	if (keycode.code === 'ArrowLeft') activeBlock.moveLeft();
-	if (keycode.code === 'ArrowDown') activeBlock.descend();
-	if (keycode.code === 'ArrowUp') activeBlock.rotate();
-	if (keycode.code === 'Space') {
-		while (!activeBlock.landed) {
-			activeBlock.descend();
+	if (!gameOver) {
+		if (keycode.code === 'ArrowRight') activeBlock.moveRight();
+		if (keycode.code === 'ArrowLeft') activeBlock.moveLeft();
+		if (keycode.code === 'ArrowDown') activeBlock.descend();
+		if (keycode.code === 'ArrowUp') activeBlock.rotate();
+		if (keycode.code === 'Space') {
+			while (!activeBlock.landed) {
+				activeBlock.descend();
+			}
+			newActiveBlock();
 		}
-		newActiveBlock();
 	}
+}
+
+function setPixelSize() {
+	pixelSize =
+		Math.max(
+			(document.documentElement.clientHeight, window.innerHeight || 0) * 0.9
+		) / gridHeight;
+}
+
+function windowResized() {
+	setPixelSize();
+	resizeCanvas(gridWidth * pixelSize, gridHeight * pixelSize);
 }
 
 function randomInt(max) {
