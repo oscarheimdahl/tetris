@@ -18,7 +18,7 @@ class Grid {
 				pixel.y * pixelSize + border,
 				pixelSize,
 				pixelSize,
-				5
+				2
 			);
 		});
 	}

@@ -5,13 +5,21 @@ const difficulty = 30;
 //35
 let pixelSize;
 
-const i_color = 'rgb(255,45,60)';
-const j_color = 'rgb(255,149,0)';
-const l_color = 'rgb(255,204,0)';
-const o_color = 'rgb(76,217,100)';
-const s_color = 'rgb(90,200,250)';
-const z_color = 'rgb(0,122,250)';
-const t_color = 'rgb(255,20,120)';
+const i_color = 'rgb(235,25,40)';
+const j_color = 'rgb(235,129,0)';
+const l_color = 'rgb(255,214,0)';
+const o_color = 'rgb(56,197,80)';
+const s_color = 'rgb(70,180,230)';
+const z_color = 'rgb(0,102,230)';
+const t_color = 'rgb(255,0,120)';
+
+// const i_color = '#391A5A';
+// const j_color = '#0E448D';
+// const l_color = '#006DB5';
+// const o_color = '#0095CD';
+// const s_color = '#00BDD2';
+// const z_color = '#00E2C8';
+// const t_color = '#281558';
 
 let gameOver = false;
 let grid = new Grid(gridWidth, gridHeight);
@@ -31,7 +39,7 @@ function setup() {
 			gridWidth * pixelSize + border * 2 + 1,
 			gridHeight * pixelSize + border * 2 + 1
 		);
-		canvas.parent('canvas');
+		canvas.parent('canvasContainer');
 	}
 }
 
