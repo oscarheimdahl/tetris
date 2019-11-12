@@ -1,105 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<link
-			rel="apple-touch-icon"
-			sizes="180x180"
-			href="/resources/apple-touch-icon.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="32x32"
-			href="/resources/favicon-32x32.png"
-		/>
-		<link
-			rel="icon"
-			type="image/png"
-			sizes="16x16"
-			href="/resources/favicon-16x16.png"
-		/>
-		<link rel="manifest" href="/resources/site.webmanifest" />
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
-		<script src="js/modules/p5.js"></script>
-		<script src="js/modules/p5.dom.js"></script>
-		<script src="js/modules/jquery-3.3.1.min.js"></script>
-		<script src="js/blocks/block.js"></script>
-		<script src="js/blocks/t_block.js"></script>
-		<script src="js/blocks/l_block.js"></script>
-		<script src="js/blocks/j_block.js"></script>
-		<script src="js/blocks/s_block.js"></script>
-		<script src="js/blocks/z_block.js"></script>
-		<script src="js/blocks/o_block.js"></script>
-		<script src="js/blocks/i_block.js"></script>
-		<script src="js/pixel.js"></script>
-		<script src="js/grid.js"></script>
-		<script src="js/tetris.js"></script>
-		<title>Tetris</title>
-	</head>
-	<body>
-		<div id="row">
-			<div id="canvasContainer"></div>
-			<div id="menu">
-				<div id="score">0</div>
-				<button id="newGame">Play Again</button>
-			</div>
-		</div>
-	</body>
-	<style>
-		* {
-			margin: 0;
-			padding: 0;
-			font-family: Arial, Helvetica, sans-serif;
-		}
+  <head>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="resources/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="resources/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="resources/favicon-16x16.png"
+    />
+    <link rel="manifest" href="resources/site.webmanifest" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="js/modules/p5.js"></script>
+    <script src="js/modules/p5.dom.js"></script>
+    <script src="js/modules/jquery-3.3.1.min.js"></script>
+    <script src="js/blocks/block.js"></script>
+    <script src="js/blocks/t_block.js"></script>
+    <script src="js/blocks/l_block.js"></script>
+    <script src="js/blocks/j_block.js"></script>
+    <script src="js/blocks/s_block.js"></script>
+    <script src="js/blocks/z_block.js"></script>
+    <script src="js/blocks/o_block.js"></script>
+    <script src="js/blocks/i_block.js"></script>
+    <script src="js/pixel.js"></script>
+    <script src="js/grid.js"></script>
+    <script src="js/tetris.js"></script>
+    <title>Tetris</title>
+  </head>
+  <body>
+    <div id="row">
+      <div id="canvasContainer"></div>
+      <div id="menu">
+        <div id="score">0</div>
+        <button id="newGame">Play Again</button>
+      </div>
+    </div>
+  </body>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-		#row {
-			display: flex;
-			vertical-align: top;
-			justify-content: center;
-		}
+    #row {
+      display: flex;
+      vertical-align: top;
+      justify-content: center;
+    }
 
-		#canvas {
-			display: inline-block;
-			margin-left: 120px;
-		}
+    #canvas {
+      display: inline-block;
+      margin-left: 120px;
+    }
 
-		#menu {
-			width: 100px;
-			margin: 40px 0 0 20px;
-		}
+    #menu {
+      width: 100px;
+      margin: 40px 0 0 20px;
+    }
 
-		#score {
-			color: white;
-			font-size: 2em;
-			width: 100px;
-			text-align: center;
-		}
+    #score {
+      color: white;
+      font-size: 2em;
+      width: 100px;
+      text-align: center;
+    }
 
-		#newGame {
-			display: none;
-			width: 100px;
-			height: 40px;
-			margin-top: 10px;
-			border: solid 1px white;
-			border-radius: 2px;
-			background: transparent;
-			color: white;
-		}
+    #newGame {
+      display: none;
+      width: 100px;
+      height: 40px;
+      margin-top: 10px;
+      border: solid 1px white;
+      border-radius: 2px;
+      background: transparent;
+      color: white;
+    }
 
-		#newGame:hover {
-			border: solid 2px white;
-		}
+    #newGame:hover {
+      border: solid 2px white;
+    }
 
-		canvas {
-			margin: 5% 0 5% 120px;
-			display: block;
-			border-radius: 2px;
-		}
+    canvas {
+      margin: 5% 0 5% 120px;
+      display: block;
+      border-radius: 2px;
+    }
 
-		body {
-			background: #111;
-		}
-	</style>
+    body {
+      background: #111;
+    }
+  </style>
 </html>
