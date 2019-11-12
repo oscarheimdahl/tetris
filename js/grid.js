@@ -10,8 +10,8 @@ class Grid {
 
 	draw() {
 		this.pixels.forEach(pixel => {
-			if (pixel.color === 'white') noStroke();
-			else stroke(255);
+			if (pixel.color === g_color) noStroke();
+			else stroke(g_color);
 			fill(pixel.color);
 			rect(
 				pixel.x * pixelSize + border,
@@ -25,7 +25,7 @@ class Grid {
 
 	reset() {
 		this.pixels.forEach(pixel => {
-			pixel.color = 'white';
+			pixel.color = g_color;
 		});
 	}
 

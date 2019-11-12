@@ -5,21 +5,14 @@ const difficulty = 30;
 //35
 let pixelSize;
 
-const i_color = 'rgb(235,25,40)';
-const j_color = 'rgb(235,129,0)';
-const l_color = 'rgb(255,214,0)';
-const o_color = 'rgb(56,197,80)';
-const s_color = 'rgb(70,180,230)';
-const z_color = 'rgb(0,102,230)';
-const t_color = 'rgb(255,0,120)';
-
-// const i_color = '#391A5A';
-// const j_color = '#0E448D';
-// const l_color = '#006DB5';
-// const o_color = '#0095CD';
-// const s_color = '#00BDD2';
-// const z_color = '#00E2C8';
-// const t_color = '#281558';
+let g_color = 'white';
+let i_color = 'rgb(235,25,40)';
+let j_color = 'rgb(235,129,0)';
+let l_color = 'rgb(255,214,0)';
+let o_color = 'rgb(56,197,80)';
+let s_color = 'rgb(70,180,230)';
+let z_color = 'rgb(0,102,230)';
+let t_color = 'rgb(255,0,120)';
 
 let gameOver = false;
 let grid = new Grid(gridWidth, gridHeight);
@@ -27,6 +20,7 @@ let activeBlock;
 let oldPixels = [];
 let ghost = [];
 let canvas;
+let pause = false;
 let score;
 
 function setup() {
@@ -44,7 +38,7 @@ function setup() {
 }
 
 function draw() {
-	background(255);
+	background(g_color);
 	grid.reset();
 	if (frameCount % difficulty == 0) {
 		activeBlock.descend();
@@ -61,7 +55,7 @@ function setGhost() {
 	ghost = [];
 	let maxYPixel = new Pixel(0, 0);
 	activeBlock.pixels.forEach(pixel => {
-		ghost.push(new Pixel(pixel.x, pixel.y, 'lightgrey'));
+		ghost.push(new Pixel(pixel.x, pixel.y, 'rgb(230,230,230)'));
 		if (pixel.y > maxYPixel.y) maxYPixel = pixel;
 	});
 	let distanceToBottom = getDistanceToOldBlocks(maxYPixel);
@@ -188,7 +182,18 @@ function pixelsToGrid(pixels) {
 }
 
 function keyPressed(keycode) {
-	if (!gameOver) {
+	if (keycode.code === 'Enter')
+		if (!pause) {
+			// g_color = 'rgb(200,200,200)';
+			pause = true;
+			noLoop();
+		} else {
+			// g_color = 'white';
+			pause = false;
+			loop();
+		}
+
+	if (!gameOver && !pause) {
 		if (keycode.code === 'ArrowRight') activeBlock.moveRight();
 		if (keycode.code === 'ArrowLeft') activeBlock.moveLeft();
 		if (keycode.code === 'ArrowDown') activeBlock.descend();
