@@ -2,6 +2,7 @@ const gridWidth = 12;
 const gridHeight = 20;
 const border = 2;
 const difficulty = 30;
+const dropTime = 80;
 //35
 let pixelSize;
 
@@ -17,6 +18,7 @@ let t_color = "rgb(255,0,120)";
 let gameOver = false;
 let grid = new Grid(gridWidth, gridHeight);
 let activeBlock;
+let nextBlock;
 let oldPixels = [];
 let ghost = [];
 let canvas;
@@ -29,7 +31,8 @@ function setup() {
   document.getElementById("newGame").onclick = () => newGame();
   score = document.getElementById("score");
   setPixelSize();
-  setBlock();
+  activeBlock = getBlock();
+  nextBlock = getBlock();
   if (!canvas) {
     canvas = createCanvas(
       gridWidth * pixelSize + border * 2 + 1,
@@ -42,7 +45,6 @@ function setup() {
 function draw() {
   background(g_color);
   grid.reset();
-  //   checkKey();
   if (frameCount % difficulty == 0) {
     activeBlock.descend();
     if (activeBlock.landed) newActiveBlock();
@@ -111,7 +113,8 @@ function deleteFullRows(rows) {
   });
   score.innerHTML =
     parseInt(score.innerHTML) + rowsDeleted.length * 100 * rowsDeleted.length;
-  setTimeout(() => lowerRowsAboveDelete(rowsDeleted), 300);
+
+  lowerRowsAboveDelete(rowsDeleted);
 }
 
 function lowerRowsAboveDelete(rowsDeleted) {
@@ -120,47 +123,43 @@ function lowerRowsAboveDelete(rowsDeleted) {
     rowsDeleted.forEach(row => {
       if (pixel.y < row) deletedRowsBelow++;
     });
-    pixel.y = pixel.y + deletedRowsBelow;
+    for (let i = 0; i < deletedRowsBelow; i++) {
+      setTimeout(() => (pixel.y = pixel.y + 1), i * dropTime + dropTime);
+    }
   });
 }
 
 function newActiveBlock() {
   activeBlockToOldPixels();
   checkFullRow();
-  setBlock();
+  activeBlock = nextBlock;
+  nextBlock = getBlock();
 }
 
-function setBlock() {
+function getBlock() {
   if (gameOver) return;
 
   switch (randomInt(7)) {
     case 0: {
-      activeBlock = new Z_Block();
-      break;
+      return new Z_Block();
     }
     case 1: {
-      activeBlock = new S_Block();
-      break;
+      return new S_Block();
     }
     case 2: {
-      activeBlock = new L_Block();
-      break;
+      return new L_Block();
     }
     case 3: {
-      activeBlock = new J_Block();
-      break;
+      return new J_Block();
     }
     case 4: {
-      activeBlock = new T_Block();
-      break;
+      return new T_Block();
     }
     case 5: {
-      activeBlock = new O_Block();
-      break;
+      return new O_Block();
     }
     case 6: {
-      activeBlock = new I_Block();
-      break;
+      return new I_Block();
     }
   }
 }
