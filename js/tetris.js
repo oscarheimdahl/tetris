@@ -23,8 +23,6 @@ let canvas;
 let pause = false;
 let score;
 
-let allowInput = true;
-
 function setup() {
   document.getElementById("newGame").onclick = () => newGame();
   score = document.getElementById("score");
@@ -42,7 +40,6 @@ function setup() {
 function draw() {
   background(g_color);
   grid.reset();
-  //   checkKey();
   if (frameCount % difficulty == 0) {
     activeBlock.descend();
     if (activeBlock.landed) newActiveBlock();
@@ -184,16 +181,8 @@ function pixelsToGrid(pixels) {
   });
 }
 
-function checkKey() {
-  if (allowInput) {
-    if (keyIsDown(DOWN_ARROW)) {
-      activeBlock.descend();
-      if (activeBlock.landed) newActiveBlock();
-    } else if (keyIsDown(RIGHT_ARROW)) activeBlock.moveRight();
-    else if (keyIsDown(LEFT_ARROW)) activeBlock.moveLeft();
-    allowInput = false;
-    setTimeout(() => (allowInput = true), 150);
-  }
+function keyReleased(code) {
+  allowInput = true;
 }
 
 function keyPressed(keycode) {
@@ -223,7 +212,6 @@ function keyPressed(keycode) {
       newActiveBlock();
     }
   }
-  setTimeout(() => (allowInput = true), 10);
 }
 
 function setPixelSize() {
